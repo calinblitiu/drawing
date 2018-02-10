@@ -29,12 +29,19 @@ app.get('/deviceslist', function (req, res, next) {
   if (deveces.length <= 0){
     res.send('no devices');
   }
-  devices.map(device => {
+  // devices.map(device => {
+  //   tempDvices.push({
+  //     deviceId: device.deviceId,
+  //     deviceName: device.deviceName
+  //   });
+  // });
+
+  for (i = 0; i < devices.length; i++) {
     tempDvices.push({
-      deviceId: device.deviceId,
-      deviceName: device.deviceName
+      deviceId: device[i].deviceId,
+      deviceName: device[i].deviceName
     });
-  });
+  }
 
   res.send(JSON.stringify(tempDvices));
 });
