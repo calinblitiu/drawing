@@ -130,23 +130,43 @@ io.on('connection', function (socket) {
   socket.on('devices list', function () {
     console.log("devices list");
     var tempDvices = [];
-    devices.map(device => {
-      if (device.status === 'connected'){
+
+    // devices.map(device => {
+    //   if (device.status === 'connected'){
+    //     var isConnected = false;
+    //     var connectedSocketId = '';
+    //     if (device.connectedSocket) {
+    //       isConnected = true;
+    //       connectedSocketId = device.connectedSocket.id;
+    //     }
+          
+    //     tempDvices.push({
+    //       deviceId: device.deviceId,
+    //       deviceName: device.deviceName,
+    //       isConnected: isConnected,
+    //       connectedId: connectedSocketId
+    //     });
+    //   }
+    // });
+
+    for (i = 0; i < devices.length; i++) {
+      if (devices[i].status === 'connected') {
         var isConnected = false;
         var connectedSocketId = '';
-        if (device.connectedSocket) {
+        if (devices[i].connectedSocket) {
           isConnected = true;
-          connectedSocketId = device.connectedSocket.id;
+          connectedSocketId = devices[i].connectedSocket.id;
         }
-          
+
         tempDvices.push({
-          deviceId: device.deviceId,
-          deviceName: device.deviceName,
+          deviceId: devices[i].deviceId,
+          deviceName: devices[i].deviceName,
           isConnected: isConnected,
           connectedId: connectedSocketId
         });
       }
-    });
+    }
+
     socket.emit('devices list', tempDvices);
   });
 
