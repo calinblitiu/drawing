@@ -26,22 +26,12 @@ app.get('*', function(req, res, next) {
 
 app.get('/deviceslist', function (req, res, next) {
   var tempDvices = [];
-  if (deveces.length <= 0){
-    res.send('no devices');
-  }
-  // devices.map(device => {
-  //   tempDvices.push({
-  //     deviceId: device.deviceId,
-  //     deviceName: device.deviceName
-  //   });
-  // });
-
-  for (i = 0; i < devices.length; i++) {
+  devices.map(device => {
     tempDvices.push({
-      deviceId: devices[i].deviceId,
-      deviceName: devices[i].deviceName
+      deviceId: device.deviceId,
+      deviceName: device.deviceName
     });
-  }
+  });
 
   res.send(JSON.stringify(tempDvices));
 });
@@ -72,6 +62,8 @@ app.post('/upload', function (req, res) {
   });
 });
 
+
+
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 io.on('connection', function (socket) {
@@ -79,26 +71,15 @@ io.on('connection', function (socket) {
   socket.on('device', function(data) {
     if (data.status === 'connected') {
       var flag = false;
-      // devices.map(device => {
-      //   if (device.deviceId === data.id) {
-      //     device.socket = socket;
-      //     device.status = data.status;
-      //     console.log('old device is actived');
-      //     flag = true;
-      //     // device.initDeviceSocket();
-      //   }
-      // });
-
-      for (i = 0; i < devices.length; i++) {
-        if (devices[i].deviceId === data.id) {
-          devices[i].socket = socket;
-          devices[i].status = data.status;
+      devices.map(device => {
+        if (device.deviceId === data.id) {
+          device.socket = socket;
+          device.status = data.status;
           console.log('old device is actived');
           flag = true;
           // device.initDeviceSocket();
         }
-      }
-
+      });
       if (!flag) {
         var device = new Device(data.name, data.id, socket);
         devices.push(device);
@@ -107,92 +88,55 @@ io.on('connection', function (socket) {
       }
       
     } else {
-      // devices.map(device => {
-      //   if(device.deviceId === data.id) {
-      //     device.socket = null;
-      //     device.status = data.status;
-      //   }
-      // });
-
-      for (i = 0; i < devices.length; i++) {
-        if (devices[i].deviceId === data.id) {
-          devices[i].socket = null;
-          devices[i].status = data.status;
+      devices.map(device => {
+        if(device.deviceId === data.id) {
+          device.socket = null;
+          device.status = data.status;
         }
-      }
+      });
       console.log('device is disconnected');
     }
 
     socket.broadcast.emit('device');
   });
 
+
   // web
   socket.on('devices list', function () {
     console.log("devices list");
     var tempDvices = [];
-
-    // devices.map(device => {
-    //   if (device.status === 'connected'){
-    //     var isConnected = false;
-    //     var connectedSocketId = '';
-    //     if (device.connectedSocket) {
-    //       isConnected = true;
-    //       connectedSocketId = device.connectedSocket.id;
-    //     }
-          
-    //     tempDvices.push({
-    //       deviceId: device.deviceId,
-    //       deviceName: device.deviceName,
-    //       isConnected: isConnected,
-    //       connectedId: connectedSocketId
-    //     });
-    //   }
-    // });
-
-    for (i = 0; i < devices.length; i++) {
-      if (devices[i].status === 'connected') {
+    devices.map(device => {
+      if (device.status === 'connected'){
         var isConnected = false;
         var connectedSocketId = '';
-        if (devices[i].connectedSocket) {
+        if (device.connectedSocket) {
           isConnected = true;
-          connectedSocketId = devices[i].connectedSocket.id;
+          connectedSocketId = device.connectedSocket.id;
         }
-
+          
         tempDvices.push({
-          deviceId: devices[i].deviceId,
-          deviceName: devices[i].deviceName,
+          deviceId: device.deviceId,
+          deviceName: device.deviceName,
           isConnected: isConnected,
           connectedId: connectedSocketId
         });
       }
-    }
-
+    });
     socket.emit('devices list', tempDvices);
   });
 
   socket.on('device connect', function(data) {
-    // devices.map(device => {
-    //   if (data.deviceId === device.deviceId && device.status === 'connected') {
-    //     if (device.connectedSocket) {
-    //       device.connectedSocket = null;
-    //     } else {
-    //       device.connectedSocket = socket;
-    //     }
-        
-    //     device.initConnect();
-    //   }
-    // });
-
-    for (i = 0; i < devices.length; i++) {
-      if (data.deviceId === devices[i].deviceId && devices[i].status === 'connected') {
-        if (devices[i].connectedSocket) {
-          devices[i].connectedSocket = null;
+    devices.map(device => {
+      if (data.deviceId === device.deviceId && device.status === 'connected') {
+        if (device.connectedSocket) {
+          device.connectedSocket = null;
         } else {
-          devices[i].connectedSocket = socket;
+          device.connectedSocket = socket;
         }
-        devices[i].initConnect();
+        
+        device.initConnect();
       }
-    }
+    });
   });
 
   // socket.on('new message', function (data) {
@@ -204,25 +148,20 @@ io.on('connection', function (socket) {
   // });
 
   socket.on('disconnect', function () {
-    // devices.map(device => {
-    //   if (device.socket === socket) {
-    //     device.status = 'disconnected';
-    //     device.connectedSocket = null;
-    //   } else if (device.connectedSocket ===  socket){
-    //     device.connectedSocket = null;
-    //   }
-
-    // });
-    for (i = 0; i < devices.length; i++) {
-      if (devices[i].socket === socket) {
-        devices[i].status = 'disconnected';
-        devices[i].connectedSocket = null;
-      } else if (devices[i].connectedSocket === socket) {
-        devices[i].connectedSocket = null;
+    devices.map(device => {
+      if (device.socket === socket) {
+        device.status = 'disconnected';
+        device.connectedSocket = null;
+      } else if (device.connectedSocket ===  socket){
+        device.connectedSocket = null;
       }
-    }
+
+    });
     socket.broadcast.emit('device');
   });
+
+
+
 });
 
 server.listen(3000);
