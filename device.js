@@ -1,6 +1,6 @@
 "use strict";
 
-class Device {
+var Device = class Device {
 
     constructor(deviceName, deviceId, socket) {
         this.deviceName = deviceName;
