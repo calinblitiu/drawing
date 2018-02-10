@@ -26,6 +26,9 @@ app.get('*', function(req, res, next) {
 
 app.get('/deviceslist', function (req, res, next) {
   var tempDvices = [];
+  if (deveces.length <= 0){
+    res.send('no devices');
+  }
   devices.map(device => {
     tempDvices.push({
       deviceId: device.deviceId,
