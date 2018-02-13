@@ -36,7 +36,12 @@ app.get('/index', function(req, res) {
 });
 
 app.get('/', function (req, res) {
-    res.redirect('/index');
+    // res.redirect('/index');
+   if (req.cookies == undefined || req.cookies.user == undefined){
+     res.redirect('/login');
+   } else {
+     res.sendFile(__dirname + "/public/first.html");
+   }
 });
 
 
@@ -55,7 +60,8 @@ app.post('/signin', function (req, res) {
         res.cookie('user', o.user, { maxAge: 900000 });
         res.cookie('pass', o.pass, { maxAge: 900000 });
       //}
-      res.status(200).send(o);
+      // res.status(200).send(o);
+      res.redirect('/');
     }
   });
 });
