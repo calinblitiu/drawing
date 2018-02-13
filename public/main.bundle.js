@@ -245,7 +245,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var config = { url: 'http://8003floors.com', options: {} };
+var config = { url: 'http://192.168.0.63:3000', options: {} };
 var AppModule = (function () {
     function AppModule() {
     }
@@ -2509,84 +2509,6 @@ var LivingRoomComponent = (function () {
                 }
             });
         });
-        __WEBPACK_IMPORTED_MODULE_9__module_evented__["a" /* Evented */].on('undo adddoor', function (e) {
-            _this.walls.map(function (wall) {
-                var delta_x = 0, delta_y = 0;
-                var startWall, endWall;
-                if (wall.wallID === e.args.oldObj[0].wallID) {
-                    me.walls.map(function (wall_) {
-                        if (wall_.wallID === wall.startID) {
-                            startWall = wall_;
-                        }
-                        else if (wall_.wallID === wall.endID) {
-                            endWall = wall_;
-                        }
-                    });
-                    console.log(wall);
-                    if (wall.doors.length === 1) {
-                        switch (wall.wallDirection) {
-                            case 'ltr':
-                                if (endWall.wallDirection === 'ttd') {
-                                    delta_y = 3 * 3;
-                                }
-                                else if (endWall.wallDirection === 'dtt') {
-                                    delta_y = -3 * 3;
-                                }
-                                break;
-                            case 'rtl':
-                                if (startWall.wallDirection === 'ttd') {
-                                    delta_y = -3 * 3;
-                                }
-                                else if (startWall.wallDirection === 'dtt') {
-                                    delta_y = 3 * 3;
-                                }
-                                break;
-                            case 'ttd':
-                                if (endWall.wallDirection === 'rtl') {
-                                    delta_x = -3 * 3;
-                                }
-                                else if (endWall.wallDirection === 'ltr') {
-                                    delta_x = 3 * 3;
-                                }
-                                break;
-                            case 'dtt':
-                                if (startWall.wallDirection === 'rtl') {
-                                    delta_x = 3 * 3;
-                                }
-                                else if (startWall.wallDirection === 'ltr') {
-                                    delta_x = -3 * 3;
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                        wall.isSelected = false;
-                        wall.startP.x += delta_x;
-                        wall.startP.y += delta_y;
-                        wall.endP.x += delta_x;
-                        wall.endP.y += delta_y;
-                        wall.changedTime = (new Date().getTime()).toString();
-                        startWall.endP.x = wall.startP.x;
-                        startWall.endP.y = wall.startP.y;
-                        startWall.changedTime = (new Date().getTime()).toString();
-                        endWall.startP.x = wall.endP.x;
-                        endWall.startP.y = wall.endP.y;
-                        endWall.changedTime = (new Date().getTime()).toString();
-                    }
-                    wall.doors.pop();
-                }
-            });
-        });
-        __WEBPACK_IMPORTED_MODULE_9__module_evented__["a" /* Evented */].on('redo adddoor', function (e) {
-            _this.walls.map(function (wall) {
-                if (wall.wallID === e.args.newObj[0].wallID) {
-                    _this.addDoorFunction({
-                        selectedWall: wall,
-                        doorType: e.args.newObj[1].doorType
-                    });
-                }
-            });
-        });
     }
     LivingRoomComponent.prototype.ngOnInit = function () {
         this.layer = new __WEBPACK_IMPORTED_MODULE_1_konva__["Layer"]();
@@ -3166,11 +3088,8 @@ var LivingRoomComponent = (function () {
             endP: new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](data.selectedWall.endP.x, data.selectedWall.endP.y)
         });
         actionItem.newObj.push({
-            doorId: temp_door.doorId,
-            clickedPoint: new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](data.selectedWall.clickedPoint.x, data.selectedWall.clickedPoint.y),
-            doorType: data.doorType
+            doorId: temp_door.doorId
         });
-        this._currentRoomService.undoredo.addActionItem(actionItem);
     };
     LivingRoomComponent.prototype.ngOnDestroy = function () {
         this.subscribers.strechersubscribe.unsubscribe();
@@ -3493,6 +3412,8 @@ var ActionItem = (function () {
         this.newObj = [];
     }
     ActionItem.prototype.undo = function () {
+        console.log('undo');
+        console.log(this);
         switch (this.actionKind) {
             case 'walllengthchange':
                 this.undoWallLengthChange();
@@ -3500,21 +3421,17 @@ var ActionItem = (function () {
             case 'strechingadd':
                 this.undoAddStreching();
                 break;
-            case 'adddoor':
-                this.undoAddDoor();
-                break;
         }
     };
     ActionItem.prototype.redo = function () {
+        console.log('redo');
+        console.log(this);
         switch (this.actionKind) {
             case 'walllengthchange':
                 this.redoWallLengthChange();
                 break;
             case 'strechingadd':
                 this.redoAddStreching();
-                break;
-            case 'adddoor':
-                this.redoAddDoor();
                 break;
             default:
                 break;
@@ -3525,19 +3442,12 @@ var ActionItem = (function () {
     };
     ActionItem.prototype.redoWallLengthChange = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('wall lengthchange event', this.newObj[0]);
-        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('add redo', this);
     };
     ActionItem.prototype.undoAddStreching = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('undo add streching event', this);
     };
     ActionItem.prototype.redoAddStreching = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('redo add streching event', this);
-    };
-    ActionItem.prototype.undoAddDoor = function () {
-        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('undo adddoor', this);
-    };
-    ActionItem.prototype.redoAddDoor = function () {
-        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('redo adddoor', this);
     };
     return ActionItem;
 }());
@@ -4428,7 +4338,6 @@ var Customer = (function () {
 
 var Door = (function () {
     function Door(data, layer, doorButtonService) {
-        var _this = this;
         this.doorButtonService = doorButtonService;
         this.defaultLength = 3 * 3 * 12;
         this.doorLength = 0;
@@ -4487,11 +4396,6 @@ var Door = (function () {
         __WEBPACK_IMPORTED_MODULE_2__evented__["a" /* Evented */].on('buttonroundclicked', function (e) {
             me.buttonRoundClicked();
         });
-        __WEBPACK_IMPORTED_MODULE_2__evented__["a" /* Evented */].on('undo adddoor', function (e) {
-            if (_this.doorId === e.args.newObj[1].doorId) {
-                _this.removeAll();
-            }
-        });
     }
     Door.prototype.initUI = function () {
         var lineParams = this.calcLineParams();
@@ -4511,7 +4415,7 @@ var Door = (function () {
             this.doorRect = new __WEBPACK_IMPORTED_MODULE_1_konva__["Line"]({
                 points: [lineParams.p1.x, lineParams.p1.y, lineParams.p2.x, lineParams.p2.y,
                     lineParams.p4.x, lineParams.p4.y, lineParams.p3.x, lineParams.p3.y],
-                fill: '#eee',
+                fill: '#f00',
                 stroke: this.DOOR_STROKE,
                 closed: true,
                 draggable: true,
@@ -4527,7 +4431,7 @@ var Door = (function () {
                 y: params.y,
                 width: params.width,
                 height: params.height,
-                fill: '#eee',
+                fill: '#f00',
                 stroke: this.DOOR_STROKE,
                 draggable: true,
                 dragBoundFunc: function (pos) {
@@ -5294,7 +5198,6 @@ var Door = (function () {
         this.betweenArrow2.remove();
         this.betweenLengthText.remove();
         this.betweenSignLine.remove();
-        this.layer.draw();
     };
     Door.prototype.showBetweenComponents = function (isShow) {
         if (isShow) {
@@ -9304,20 +9207,14 @@ var Substrate = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UndoRedo; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__evented__ = __webpack_require__("../../../../../src/app/module/evented.ts");
-
 var UndoRedo = (function () {
     function UndoRedo() {
-        var _this = this;
         this.actions = [];
         this.undoactions = [];
-        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].on('add redo', function (e) {
-            _this.actions.push(e.args);
-        });
     }
     UndoRedo.prototype.addActionItem = function (actionItem) {
         this.actions.push(actionItem);
-        // this.undoactions = [];
+        this.undoactions = [];
     };
     UndoRedo.prototype.getCountActionItems = function () {
         return this.actions.length;
@@ -9341,6 +9238,7 @@ var UndoRedo = (function () {
     };
     UndoRedo.prototype.redo = function () {
         var actionItem = this.undoactions.pop();
+        this.actions.push(actionItem);
         actionItem.redo();
     };
     return UndoRedo;
@@ -12534,12 +12432,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var URL = 'http://8003floors.com/upload';
+var URL = 'http://localhost:3000/upload';
 var PhotobuttonComponent = (function (_super) {
     __extends(PhotobuttonComponent, _super);
     function PhotobuttonComponent() {
         var _this = _super.call(this) || this;
-        _this.URL_IMG = 'http://8003floors.com/uploads/';
+        _this.URL_IMG = 'http://localhost:3000/uploads/';
         _this.isShow = false;
         _this.uploader = new __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload_ng2_file_upload__["FileUploader"]({ url: URL, itemAlias: 'file' });
         _this.images = [];
@@ -12552,6 +12450,8 @@ var PhotobuttonComponent = (function (_super) {
         // able to deal with the server response.
         var me = this;
         this.uploader.onCompleteItem = function (item, response, status, headers) {
+            console.log(response);
+            console.log(response.url);
             var result = JSON.parse(response);
             me.images.push(result.url);
         };
@@ -14112,6 +14012,13 @@ var WallComponent = (function () {
                     break;
             }
         }
+        var circlie = new __WEBPACK_IMPORTED_MODULE_1_konva__["Circle"]({
+            x: this.wall.clickedPoint.x,
+            y: this.wall.clickedPoint.y,
+            radius: 5,
+            fill: '#0f0'
+        });
+        this.group.add(circlie);
         this.redrawClickedPoint();
         this.layer.draw();
     };

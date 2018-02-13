@@ -5,9 +5,14 @@ var app = express();
 var Device = require('./device');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var MongoStore = require('connect-mongo')(session);
+var AM = require('./user_module');
+
 
 var devices = [];
-
+app.locals.pretty = true;
 app.use(function (req, res, next) { //allow cross origin requests
   res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
   res.header("Access-Control-Allow-Origin", "*");
@@ -15,14 +20,66 @@ app.use(function (req, res, next) { //allow cross origin requests
   res.header("Access-Control-Allow-Credentials", true);
   next();
 });
-
-// app.use(express.static(path.join(__dirname, 'uploads')));
-
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
-app.get('*', function(req, res, next) {
-  res.sendFile(__dirname+"/public/index.html");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+app.get('/index', function(req, res) {
+ if (req.cookies == undefined || req.cookies.user == undefined){
+   res.redirect('/login');
+ } else {
+   res.sendFile(__dirname + "/public/first.html");
+ }
+  
 });
+
+app.get('/', function (req, res) {
+    res.redirect('/index');
+});
+
+
+app.get('/login', function (req, res) {
+  res.sendFile(__dirname + "/public/login.html");
+  // res.redirect('/');
+});
+
+app.post('/signin', function (req, res) {
+  AM.manualLogin(req.body['user'], req.body['password'], function (e, o) {
+    if (!o) {
+      res.status(400).send(e);
+    } else {
+      //req.session.user = o;
+      //if (req.body['remember-me'] == 'true') {
+        res.cookie('user', o.user, { maxAge: 900000 });
+        res.cookie('pass', o.pass, { maxAge: 900000 });
+      //}
+      res.status(200).send(o);
+    }
+  });
+});
+
+app.get("/signup", function(req, res){
+  res.sendFile(__dirname + "/public/signup.html");
+});
+
+app.post('/signup', function (req, res) {
+  console.log(req.body);
+  
+  AM.addNewAccount({
+    email: req.body['email'],
+    user: req.body['user'],
+    pass: req.body['pass'],
+  }, function (e) {
+    if (e) {
+      res.status(400).send(e);
+    } else {
+      res.status(200).send('ok');
+    }
+  });
+});
+
 
 app.get('/deviceslist', function (req, res, next) {
   var tempDvices = [];
@@ -160,8 +217,26 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('device');
   });
 
-
-
 });
 
-server.listen(80);
+
+
+var dbHost = process.env.DB_HOST || 'localhost'
+var dbPort = process.env.DB_PORT || 27017;
+var dbName = process.env.DB_NAME || 'drawing';
+
+var dbURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + dbName;
+if (app.get('env') == 'live') {
+  // prepend url with authentication credentials // 
+  dbURL = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@' + dbHost + ':' + dbPort + '/' + dbName;
+}
+app.use(session({
+  secret: 'faeb4453e5d14fe6f6d04637f78077c76c73d1b4',
+  proxy: true,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    url: dbURL
+  })
+}));
+server.listen(3000);
