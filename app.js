@@ -26,16 +26,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-app.get('/index', function(req, res) {
- if (req.cookies == undefined || req.cookies.user == undefined){
-   res.redirect('/login');
- } else {
-   res.sendFile(__dirname + "/public/first.html");
- }
-  
-});
+// app.get('/index', function(req, res) {
+//  if (req.cookies == undefined || req.cookies.user == undefined){
+//    res.redirect('/login');
+//  } else {
+//    res.sendFile(__dirname + "/public/first.html");
+//  }
+// });
 
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
     // res.redirect('/index');
    // if (req.cookies == undefined || req.cookies.user == undefined){
    //   res.redirect('/login');
@@ -46,15 +45,15 @@ app.get('/', function (req, res) {
 });
 
 
-app.get('/login', function (req, res) {
-  //res.sendFile(__dirname + "/public/login.html");
-  // res.redirect('/');
-  if (req.cookies == undefined || req.cookies.user == undefined){
-   res.sendFile(__dirname + "/public/login.html");
- } else {
-   res.redirect("/");
- }
-});
+// app.get('/login', function (req, res) {
+//   //res.sendFile(__dirname + "/public/login.html");
+//   // res.redirect('/');
+//   if (req.cookies == undefined || req.cookies.user == undefined){
+//    res.sendFile(__dirname + "/public/login.html");
+//  } else {
+//    res.redirect("/");
+//  }
+// });
 
 app.post('/signin', function (req, res) {
   AM.manualLogin(req.body['user'], req.body['password'], function (e, o) {
@@ -73,9 +72,9 @@ app.post('/signin', function (req, res) {
   });
 });
 
-app.get("/signup", function(req, res){
-  res.sendFile(__dirname + "/public/signup.html");
-});
+// app.get("/signup", function(req, res){
+//   res.sendFile(__dirname + "/public/signup.html");
+// });
 
 app.post('/signup', function (req, res) {
   console.log(req.body);
@@ -94,17 +93,17 @@ app.post('/signup', function (req, res) {
 });
 
 
-app.get('/deviceslist', function (req, res, next) {
-  var tempDvices = [];
-  devices.map(device => {
-    tempDvices.push({
-      deviceId: device.deviceId,
-      deviceName: device.deviceName
-    });
-  });
+// app.get('/deviceslist', function (req, res, next) {
+//   var tempDvices = [];
+//   devices.map(device => {
+//     tempDvices.push({
+//       deviceId: device.deviceId,
+//       deviceName: device.deviceName
+//     });
+//   });
 
-  res.send(JSON.stringify(tempDvices));
-});
+//   res.send(JSON.stringify(tempDvices));
+// });
 
 var storage = multer.diskStorage({ //multers disk storage settings
   destination: function (req, file, cb) {
