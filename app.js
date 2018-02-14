@@ -60,7 +60,8 @@ app.post('/signin', function (req, res) {
     if (!o) {
       res.status(400).send(e);
     } else {
-      //req.session.user = o;
+      console.log(o);
+      req.session.user = o;
       //if (req.body['remember-me'] == 'true') {
         res.cookie('user', o.user, { maxAge: 900000 });
         res.cookie('pass', o.pass, { maxAge: 900000 });
