@@ -48,7 +48,7 @@ app.get('/', function (req, res) {
 app.get('/login', function (req, res) {
   //res.sendFile(__dirname + "/public/login.html");
   // res.redirect('/');
-  f (req.cookies == undefined || req.cookies.user == undefined){
+  if (req.cookies == undefined || req.cookies.user == undefined){
    res.sendFile(__dirname + "/public/login.html");
  } else {
    res.redirect("/");
