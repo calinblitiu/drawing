@@ -37,11 +37,12 @@ app.get('/index', function(req, res) {
 
 app.get('/', function (req, res) {
     // res.redirect('/index');
-   if (req.cookies == undefined || req.cookies.user == undefined){
-     res.redirect('/login');
-   } else {
-     res.sendFile(__dirname + "/public/first.html");
-   }
+   // if (req.cookies == undefined || req.cookies.user == undefined){
+   //   res.redirect('/login');
+   // } else {
+   //   res.sendFile(__dirname + "/public/first.html");
+   // }
+    res.sendFile(__dirname + "/public/login.html");
 });
 
 
