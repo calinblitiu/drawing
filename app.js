@@ -26,24 +26,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-app.get('/index', function(req, res) {
- if (req.cookies == undefined || req.cookies.user == undefined){
-   res.redirect('/login');
- } else {
-   res.sendFile(__dirname + "/public/first.html");
- }
+// app.get('/index', function(req, res) {
+//  if (req.cookies == undefined || req.cookies.user == undefined){
+//    res.redirect('/login');
+//  } else {
+//    res.sendFile(__dirname + "/public/first.html");
+//  }
   
-});
+// });
 
 app.get('/', function (req, res) {
-    res.redirect('/index');
+   res.sendFile(__dirname + "/public/first.html");
 });
 
 
-app.get('/login', function (req, res) {
-  res.sendFile(__dirname + "/public/login.html");
-  // res.redirect('/');
-});
+// app.get('/login', function (req, res) {
+//   res.sendFile(__dirname + "/public/login.html");
+//   // res.redirect('/');
+// });
 
 app.post('/signin', function (req, res) {
   console.log(req.body);
@@ -62,9 +62,9 @@ app.post('/signin', function (req, res) {
   });
 });
 
-app.get("/signup", function(req, res){
-  res.sendFile(__dirname + "/public/signup.html");
-});
+// app.get("/signup", function(req, res){
+//   res.sendFile(__dirname + "/public/signup.html");
+// });
 
 app.post('/signup', function (req, res) {
   console.log(req.body);
