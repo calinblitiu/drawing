@@ -5,7 +5,7 @@ var Server = require('mongodb').Server;
 var moment = require('moment');
 
 /*
-	ESTABLISH DATABASE CONNECTION
+    ESTABLISH DATABASE CONNECTION
 */
 
 var dbName = process.env.DB_NAME || 'drawing';
@@ -89,10 +89,21 @@ exports.addNewAccount = function (newData, callback) {
 }
 
 exports.updateAccount = function (newData, callback) {
-    accounts.findOne({ _id: getObjectId(newData.id) }, function (e, o) {
-        o.name = newData.name;
+    accounts.findOne({ _id: getObjectId(newData._id) }, function (e, o) {
+
+        o.firstname = newData.firstname;
+        o.lastname = newData.lastname;
         o.email = newData.email;
-        o.country = newData.country;
+        o.address = newData.address;
+        o.cell = newData.cell;
+        o.city = newData.city;
+        o.cross_streets1 = newData.cross_streets1;
+        o.cross_streets2 = newData.cross_streets2;
+        o.phone = newData.phone;
+        o.state = newData.state;
+        o.salesperson1 = newData.salesperson1;
+        o.salesperson2 = newData.salesperson2;
+        o.zip = newData.zip;
         if (newData.pass == '') {
             accounts.save(o, { safe: true }, function (e) {
                 if (e) callback(e);
@@ -100,7 +111,7 @@ exports.updateAccount = function (newData, callback) {
             });
         } else {
             saltAndHash(newData.pass, function (hash) {
-                o.pass = hash;
+                // o.pass = hash;
                 accounts.save(o, { safe: true }, function (e) {
                     if (e) callback(e);
                     else callback(null, o);

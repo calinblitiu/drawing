@@ -28,6 +28,10 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__type_floor_area_to_cover_type_floor_area_to_cover_component__ = __webpack_require__("../../../../../src/app/type-floor-area-to-cover/type-floor-area-to-cover.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__grouparea_grouparea_component__ = __webpack_require__("../../../../../src/app/grouparea/grouparea.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__sockettest_sockettest_component__ = __webpack_require__("../../../../../src/app/sockettest/sockettest.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loginform_loginform_component__ = __webpack_require__("../../../../../src/app/loginform/loginform.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__authguard_guard__ = __webpack_require__("../../../../../src/app/authguard.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__notfound_notfound_component__ = __webpack_require__("../../../../../src/app/notfound/notfound.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__registerform_registerform_component__ = __webpack_require__("../../../../../src/app/registerform/registerform.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40,14 +44,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
+
 var routes = [
     // { path: 'drawing', component: DrawingPanelComponent },
-    { path: 'drawing/:type', component: __WEBPACK_IMPORTED_MODULE_2__drawing_panel_drawing_panel_component__["a" /* DrawingPanelComponent */] },
-    { path: 'drawing/:type/:otherTitle', component: __WEBPACK_IMPORTED_MODULE_2__drawing_panel_drawing_panel_component__["a" /* DrawingPanelComponent */] },
-    { path: 'areatocover', component: __WEBPACK_IMPORTED_MODULE_3__type_floor_area_to_cover_type_floor_area_to_cover_component__["a" /* TypeFloorAreaToCoverComponent */] },
-    { path: 'grouping', component: __WEBPACK_IMPORTED_MODULE_4__grouparea_grouparea_component__["a" /* GroupareaComponent */] },
-    { path: 'sockettest', component: __WEBPACK_IMPORTED_MODULE_5__sockettest_sockettest_component__["a" /* SockettestComponent */] },
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__type_floor_area_to_cover_type_floor_area_to_cover_component__["a" /* TypeFloorAreaToCoverComponent */] }
+    {
+        path: 'drawing/:type',
+        component: __WEBPACK_IMPORTED_MODULE_2__drawing_panel_drawing_panel_component__["a" /* DrawingPanelComponent */]
+    },
+    {
+        path: 'drawing/:type/:otherTitle',
+        component: __WEBPACK_IMPORTED_MODULE_2__drawing_panel_drawing_panel_component__["a" /* DrawingPanelComponent */]
+    },
+    {
+        path: 'areatocover',
+        canActivate: [__WEBPACK_IMPORTED_MODULE_7__authguard_guard__["a" /* AuthguardGuard */]],
+        component: __WEBPACK_IMPORTED_MODULE_3__type_floor_area_to_cover_type_floor_area_to_cover_component__["a" /* TypeFloorAreaToCoverComponent */]
+    },
+    {
+        path: 'grouping',
+        component: __WEBPACK_IMPORTED_MODULE_4__grouparea_grouparea_component__["a" /* GroupareaComponent */]
+    },
+    {
+        path: 'sockettest', component: __WEBPACK_IMPORTED_MODULE_5__sockettest_sockettest_component__["a" /* SockettestComponent */]
+    },
+    {
+        path: '',
+        component: __WEBPACK_IMPORTED_MODULE_6__loginform_loginform_component__["a" /* LoginformComponent */]
+    },
+    {
+        path: 'registeruser',
+        component: __WEBPACK_IMPORTED_MODULE_9__registerform_registerform_component__["a" /* RegisterformComponent */]
+    },
+    {
+        path: '**',
+        component: __WEBPACK_IMPORTED_MODULE_8__notfound_notfound_component__["a" /* NotfoundComponent */]
+    },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
@@ -68,7 +102,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<router-outlet></router-outlet>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<router-outlet></router-outlet>\n<!-- <app-loginform></app-loginform> -->"
 
 /***/ }),
 
@@ -183,6 +217,13 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__upload_upload_component__ = __webpack_require__("../../../../../src/app/upload/upload.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55_ng2_file_upload__ = __webpack_require__("../../../../ng2-file-upload/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_55_ng2_file_upload___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_55_ng2_file_upload__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__loginform_loginform_component__ = __webpack_require__("../../../../../src/app/loginform/loginform.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__services_user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__authguard_guard__ = __webpack_require__("../../../../../src/app/authguard.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__notfound_notfound_component__ = __webpack_require__("../../../../../src/app/notfound/notfound.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_61__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_62__registerform_registerform_component__ = __webpack_require__("../../../../../src/app/registerform/registerform.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -245,7 +286,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var config = { url: 'http://192.168.0.63:3000', options: {} };
+
+
+
+
+
+
+
+var config = { url: 'http://8003floors.com', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 var AppModule = (function () {
     function AppModule() {
     }
@@ -293,13 +342,17 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_51__devtool_devtool_component__["a" /* DevtoolComponent */],
                 __WEBPACK_IMPORTED_MODULE_53__groupstaircaseinfomodal_groupstaircaseinfomodal_component__["a" /* GroupstaircaseinfomodalComponent */],
                 __WEBPACK_IMPORTED_MODULE_54__upload_upload_component__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_55_ng2_file_upload__["FileSelectDirective"]
+                __WEBPACK_IMPORTED_MODULE_55_ng2_file_upload__["FileSelectDirective"],
+                __WEBPACK_IMPORTED_MODULE_56__loginform_loginform_component__["a" /* LoginformComponent */],
+                __WEBPACK_IMPORTED_MODULE_59__notfound_notfound_component__["a" /* NotfoundComponent */],
+                __WEBPACK_IMPORTED_MODULE_62__registerform_registerform_component__["a" /* RegisterformComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_48__module_socket_io_module__["b" /* SocketIoModule */].forRoot(config)
+                __WEBPACK_IMPORTED_MODULE_48__module_socket_io_module__["b" /* SocketIoModule */].forRoot(config),
+                __WEBPACK_IMPORTED_MODULE_61__angular_common_http__["b" /* HttpClientModule */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_9__services_index__["a" /* ModalService */],
@@ -310,7 +363,10 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_40__services_currentroom_service__["a" /* CurrentroomService */],
                 __WEBPACK_IMPORTED_MODULE_41__services_currentgroup_service__["a" /* CurrentgroupService */],
                 __WEBPACK_IMPORTED_MODULE_50__services_socket_service__["a" /* SocketService */],
-                __WEBPACK_IMPORTED_MODULE_52__services_customer_service__["a" /* CustomerService */]
+                __WEBPACK_IMPORTED_MODULE_52__services_customer_service__["a" /* CustomerService */],
+                __WEBPACK_IMPORTED_MODULE_57__services_user_service__["a" /* UserService */],
+                __WEBPACK_IMPORTED_MODULE_58__authguard_guard__["a" /* AuthguardGuard */],
+                __WEBPACK_IMPORTED_MODULE_60__services_authentication_service__["a" /* AuthenticationService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         })
@@ -587,6 +643,49 @@ var AreaComponent = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_index__["a" /* ModalService */]])
     ], AreaComponent);
     return AreaComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/authguard.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthguardGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthguardGuard = (function () {
+    function AuthguardGuard(userService, router) {
+        this.userService = userService;
+        this.router = router;
+    }
+    AuthguardGuard.prototype.canActivate = function (next, state) {
+        if (!this.userService.getuserLoggedIn()) {
+            this.router.navigate(['/']);
+        }
+        return this.userService.getuserLoggedIn();
+    };
+    AuthguardGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]])
+    ], AuthguardGuard);
+    return AuthguardGuard;
 }());
 
 
@@ -2509,6 +2608,84 @@ var LivingRoomComponent = (function () {
                 }
             });
         });
+        __WEBPACK_IMPORTED_MODULE_9__module_evented__["a" /* Evented */].on('undo adddoor', function (e) {
+            _this.walls.map(function (wall) {
+                var delta_x = 0, delta_y = 0;
+                var startWall, endWall;
+                if (wall.wallID === e.args.oldObj[0].wallID) {
+                    me.walls.map(function (wall_) {
+                        if (wall_.wallID === wall.startID) {
+                            startWall = wall_;
+                        }
+                        else if (wall_.wallID === wall.endID) {
+                            endWall = wall_;
+                        }
+                    });
+                    console.log(wall);
+                    if (wall.doors.length === 1) {
+                        switch (wall.wallDirection) {
+                            case 'ltr':
+                                if (endWall.wallDirection === 'ttd') {
+                                    delta_y = 3 * 3;
+                                }
+                                else if (endWall.wallDirection === 'dtt') {
+                                    delta_y = -3 * 3;
+                                }
+                                break;
+                            case 'rtl':
+                                if (startWall.wallDirection === 'ttd') {
+                                    delta_y = -3 * 3;
+                                }
+                                else if (startWall.wallDirection === 'dtt') {
+                                    delta_y = 3 * 3;
+                                }
+                                break;
+                            case 'ttd':
+                                if (endWall.wallDirection === 'rtl') {
+                                    delta_x = -3 * 3;
+                                }
+                                else if (endWall.wallDirection === 'ltr') {
+                                    delta_x = 3 * 3;
+                                }
+                                break;
+                            case 'dtt':
+                                if (startWall.wallDirection === 'rtl') {
+                                    delta_x = 3 * 3;
+                                }
+                                else if (startWall.wallDirection === 'ltr') {
+                                    delta_x = -3 * 3;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        wall.isSelected = false;
+                        wall.startP.x += delta_x;
+                        wall.startP.y += delta_y;
+                        wall.endP.x += delta_x;
+                        wall.endP.y += delta_y;
+                        wall.changedTime = (new Date().getTime()).toString();
+                        startWall.endP.x = wall.startP.x;
+                        startWall.endP.y = wall.startP.y;
+                        startWall.changedTime = (new Date().getTime()).toString();
+                        endWall.startP.x = wall.endP.x;
+                        endWall.startP.y = wall.endP.y;
+                        endWall.changedTime = (new Date().getTime()).toString();
+                    }
+                    wall.doors.pop();
+                }
+            });
+        });
+        __WEBPACK_IMPORTED_MODULE_9__module_evented__["a" /* Evented */].on('redo adddoor', function (e) {
+            _this.walls.map(function (wall) {
+                if (wall.wallID === e.args.newObj[0].wallID) {
+                    _this.addDoorFunction({
+                        selectedWall: wall,
+                        doorType: e.args.newObj[1].doorType
+                    });
+                }
+            });
+        });
     }
     LivingRoomComponent.prototype.ngOnInit = function () {
         this.layer = new __WEBPACK_IMPORTED_MODULE_1_konva__["Layer"]();
@@ -3088,8 +3265,11 @@ var LivingRoomComponent = (function () {
             endP: new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](data.selectedWall.endP.x, data.selectedWall.endP.y)
         });
         actionItem.newObj.push({
-            doorId: temp_door.doorId
+            doorId: temp_door.doorId,
+            clickedPoint: new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](data.selectedWall.clickedPoint.x, data.selectedWall.clickedPoint.y),
+            doorType: data.doorType
         });
+        this._currentRoomService.undoredo.addActionItem(actionItem);
     };
     LivingRoomComponent.prototype.ngOnDestroy = function () {
         this.subscribers.strechersubscribe.unsubscribe();
@@ -3260,6 +3440,93 @@ var LivingRoomComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/loginform/loginform.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"login-form\">\n  <div class=\"login-content\">\n    <div class=\"login-body\">\n        <div class=\"form-group\">\n          <label for=\"email\">User:</label>\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"user\">\n        </div>\n        <div class=\"form-group\">\n          <label for=\"pwd\">Password:</label>\n          <input type=\"password\" class=\"form-control\" [(ngModel)]=\"userPassword\">\n        </div>\n        <button type=\"button\" class=\"btn btn-success\" (click)='loginBTNClick()'>Login</button>\n        <span (click)='createAccount()' style=\"cursor: pointer;text-decoration: underline;\">Create Account</span>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/loginform/loginform.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".login-form .login-content {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1000;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n  .login-form .login-content .login-body {\n    padding: 15px;\n    border: solid 1px #888;\n    border-radius: 5px;\n    width: 300px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/loginform/loginform.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginformComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var LoginformComponent = (function () {
+    function LoginformComponent(router, userService, authService) {
+        this.router = router;
+        this.userService = userService;
+        this.authService = authService;
+        this.user = '';
+        this.userPassword = '';
+    }
+    LoginformComponent.prototype.ngOnInit = function () {
+    };
+    LoginformComponent.prototype.loginBTNClick = function () {
+        var _this = this;
+        this.authService.login(this.user, this.userPassword)
+            .subscribe(function (data) {
+            _this.userService.setUserLoggedIn();
+            _this.router.navigate(['areatocover']);
+        }, function (error) {
+            alert('login faild');
+        });
+    };
+    LoginformComponent.prototype.createAccount = function () {
+        this.router.navigate(['registeruser']);
+    };
+    LoginformComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-loginform',
+            template: __webpack_require__("../../../../../src/app/loginform/loginform.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/loginform/loginform.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2__services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__["a" /* AuthenticationService */]])
+    ], LoginformComponent);
+    return LoginformComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/modal-component/modal-component.component.html":
 /***/ (function(module, exports) {
 
@@ -3412,8 +3679,6 @@ var ActionItem = (function () {
         this.newObj = [];
     }
     ActionItem.prototype.undo = function () {
-        console.log('undo');
-        console.log(this);
         switch (this.actionKind) {
             case 'walllengthchange':
                 this.undoWallLengthChange();
@@ -3421,17 +3686,21 @@ var ActionItem = (function () {
             case 'strechingadd':
                 this.undoAddStreching();
                 break;
+            case 'adddoor':
+                this.undoAddDoor();
+                break;
         }
     };
     ActionItem.prototype.redo = function () {
-        console.log('redo');
-        console.log(this);
         switch (this.actionKind) {
             case 'walllengthchange':
                 this.redoWallLengthChange();
                 break;
             case 'strechingadd':
                 this.redoAddStreching();
+                break;
+            case 'adddoor':
+                this.redoAddDoor();
                 break;
             default:
                 break;
@@ -3442,12 +3711,19 @@ var ActionItem = (function () {
     };
     ActionItem.prototype.redoWallLengthChange = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('wall lengthchange event', this.newObj[0]);
+        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('add redo', this);
     };
     ActionItem.prototype.undoAddStreching = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('undo add streching event', this);
     };
     ActionItem.prototype.redoAddStreching = function () {
         __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('redo add streching event', this);
+    };
+    ActionItem.prototype.undoAddDoor = function () {
+        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('undo adddoor', this);
+    };
+    ActionItem.prototype.redoAddDoor = function () {
+        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].fire('redo adddoor', this);
     };
     return ActionItem;
 }());
@@ -4303,6 +4579,7 @@ var CornerPoint = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Customer; });
 var Customer = (function () {
     function Customer() {
+        this._id = '';
         this.firstName = '';
         this.lastName = '';
         this.phone = '';
@@ -4338,6 +4615,7 @@ var Customer = (function () {
 
 var Door = (function () {
     function Door(data, layer, doorButtonService) {
+        var _this = this;
         this.doorButtonService = doorButtonService;
         this.defaultLength = 3 * 3 * 12;
         this.doorLength = 0;
@@ -4396,6 +4674,11 @@ var Door = (function () {
         __WEBPACK_IMPORTED_MODULE_2__evented__["a" /* Evented */].on('buttonroundclicked', function (e) {
             me.buttonRoundClicked();
         });
+        __WEBPACK_IMPORTED_MODULE_2__evented__["a" /* Evented */].on('undo adddoor', function (e) {
+            if (_this.doorId === e.args.newObj[1].doorId) {
+                _this.removeAll();
+            }
+        });
     }
     Door.prototype.initUI = function () {
         var lineParams = this.calcLineParams();
@@ -4415,7 +4698,7 @@ var Door = (function () {
             this.doorRect = new __WEBPACK_IMPORTED_MODULE_1_konva__["Line"]({
                 points: [lineParams.p1.x, lineParams.p1.y, lineParams.p2.x, lineParams.p2.y,
                     lineParams.p4.x, lineParams.p4.y, lineParams.p3.x, lineParams.p3.y],
-                fill: '#f00',
+                fill: '#eee',
                 stroke: this.DOOR_STROKE,
                 closed: true,
                 draggable: true,
@@ -4431,7 +4714,7 @@ var Door = (function () {
                 y: params.y,
                 width: params.width,
                 height: params.height,
-                fill: '#f00',
+                fill: '#eee',
                 stroke: this.DOOR_STROKE,
                 draggable: true,
                 dragBoundFunc: function (pos) {
@@ -5198,6 +5481,7 @@ var Door = (function () {
         this.betweenArrow2.remove();
         this.betweenLengthText.remove();
         this.betweenSignLine.remove();
+        this.layer.draw();
     };
     Door.prototype.showBetweenComponents = function (isShow) {
         if (isShow) {
@@ -9207,14 +9491,20 @@ var Substrate = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UndoRedo; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__evented__ = __webpack_require__("../../../../../src/app/module/evented.ts");
+
 var UndoRedo = (function () {
     function UndoRedo() {
+        var _this = this;
         this.actions = [];
         this.undoactions = [];
+        __WEBPACK_IMPORTED_MODULE_0__evented__["a" /* Evented */].on('add redo', function (e) {
+            _this.actions.push(e.args);
+        });
     }
     UndoRedo.prototype.addActionItem = function (actionItem) {
         this.actions.push(actionItem);
-        this.undoactions = [];
+        // this.undoactions = [];
     };
     UndoRedo.prototype.getCountActionItems = function () {
         return this.actions.length;
@@ -9238,7 +9528,6 @@ var UndoRedo = (function () {
     };
     UndoRedo.prototype.redo = function () {
         var actionItem = this.undoactions.pop();
-        this.actions.push(actionItem);
         actionItem.redo();
     };
     return UndoRedo;
@@ -10309,6 +10598,67 @@ var WallClosetBaicWall = (function (_super) {
 
 /***/ }),
 
+/***/ "../../../../../src/app/notfound/notfound.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  notfound works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/notfound/notfound.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/notfound/notfound.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotfoundComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var NotfoundComponent = (function () {
+    function NotfoundComponent() {
+    }
+    NotfoundComponent.prototype.ngOnInit = function () {
+    };
+    NotfoundComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-notfound',
+            template: __webpack_require__("../../../../../src/app/notfound/notfound.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/notfound/notfound.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], NotfoundComponent);
+    return NotfoundComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/page-not-found/page-not-found.component.html":
 /***/ (function(module, exports) {
 
@@ -10737,6 +11087,106 @@ var PreviewComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/registerform/registerform.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"register-form\">\n  <div class=\"register-content\">\n    <div class=\"register-body\">\n      <div class=\"form-group\">\n        <label for=\"\">Email:</label>\n        <input type=\"email\" class=\"form-control\" [(ngModel)]=\"userEmail\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"\">UserId:</label>\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"userId\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"\">First Name:</label>\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"userFirstName\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"\">Last Name:</label>\n        <input type=\"text\" class=\"form-control\" [(ngModel)]=\"userLastName\">\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"pwd\">Password:</label>\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"userPassword\">\n      </div>\n      <div class=\"form-group\">\n        <label for=\"pwd\">rePassword:</label>\n        <input type=\"password\" class=\"form-control\" [(ngModel)]=\"userrePassword\">\n      </div>\n      <span (click)='gotosignin()' style=\"cursor: pointer;text-decoration: underline;\">Signin</span>\n      <button type=\"button\" class=\"btn btn-success\" (click)='createAccount()'>Create</button>\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/registerform/registerform.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".register-form .register-content {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1000;\n  overflow: auto;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n  .register-form .register-content .register-body {\n    padding: 15px;\n    border: solid 1px #888;\n    border-radius: 5px;\n    width: 300px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/registerform/registerform.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterformComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var RegisterformComponent = (function () {
+    function RegisterformComponent(router, userService, authService) {
+        this.router = router;
+        this.userService = userService;
+        this.authService = authService;
+        this.userEmail = '';
+        this.userId = '';
+        this.userFirstName = '';
+        this.userLastName = '';
+        this.userPassword = '';
+        this.userrePassword = '';
+    }
+    RegisterformComponent.prototype.ngOnInit = function () {
+    };
+    RegisterformComponent.prototype.createAccount = function () {
+        var _this = this;
+        if (this.userEmail === '' || this.userId === '' || this.userFirstName === '' || this.userLastName === '' || this.userPassword === ''
+            || this.userrePassword === '') {
+            alert('Please Input all information');
+            return;
+        }
+        if (this.userPassword !== this.userrePassword) {
+            alert('Password is not matched!');
+            return;
+        }
+        this.authService.signup(this.userEmail, this.userId, this.userFirstName, this.userLastName, this.userPassword)
+            .subscribe(function (data) {
+            _this.userService.setUserLoggedIn();
+            _this.router.navigate(['areatocover']);
+        }, function (error) {
+            alert('login faild');
+        });
+    };
+    RegisterformComponent.prototype.gotosignin = function () {
+        this.router.navigate(['/']);
+    };
+    RegisterformComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-registerform',
+            template: __webpack_require__("../../../../../src/app/registerform/registerform.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/registerform/registerform.component.scss")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_2__services_user_service__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_authentication_service__["a" /* AuthenticationService */]])
+    ], RegisterformComponent);
+    return RegisterformComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/services/areas.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10793,6 +11243,97 @@ var AreasService = (function () {
         __metadata("design:paramtypes", [])
     ], AreasService);
     return AreasService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/authentication.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticationService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__ = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// import { Observable } from '@angular/Observable';
+// import 'rxjs/add/operator/map';
+var AuthenticationService = (function () {
+    function AuthenticationService(http, userService) {
+        this.http = http;
+        this.userService = userService;
+        // signinUrl = 'http://localhost:3000/signin';
+        // signupUrl = 'http://localhost:3000/signup';
+        // updateUrl = 'http://localhost:3000/updateuser';
+        this.signinUrl = 'http://8003floors.com/signin';
+        this.signupUrl = 'http://8003floors.com/signup';
+        this.updateUrl = 'http://8003floors.com/updateuser';
+        this.loginSource = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
+        this.login$ = this.loginSource.asObservable();
+    }
+    AuthenticationService.prototype.login = function (username, password) {
+        var _this = this;
+        return this.http.post(this.signinUrl, { user: username, password: password })
+            .map(function (user) {
+            if (user && user._id) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                _this.userService.setUser();
+            }
+            return user;
+        });
+    };
+    AuthenticationService.prototype.signup = function (useremail, userid, firstname, lastname, password) {
+        var _this = this;
+        return this.http.post(this.signupUrl, {
+            user: userid,
+            pass: password,
+            firstname: firstname,
+            lastname: lastname,
+            email: useremail
+        })
+            .map(function (user) {
+            if (user && user._id) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                _this.userService.setUser();
+            }
+            return user;
+        });
+    };
+    AuthenticationService.prototype.update = function (data) {
+        var _this = this;
+        return this.http.post(this.updateUrl, data)
+            .map(function (user) {
+            if (user && user._id) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                _this.userService.setUser();
+            }
+            return user;
+        });
+    };
+    AuthenticationService.prototype.logout = function () {
+        localStorage.removeItem('currentUser');
+    };
+    AuthenticationService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_3__user_service__["a" /* UserService */]])
+    ], AuthenticationService);
+    return AuthenticationService;
 }());
 
 
@@ -10911,6 +11452,7 @@ var CurrentroomService = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CustomerService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__module_customer__ = __webpack_require__("../../../../../src/app/module/customer.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10922,13 +11464,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var CustomerService = (function () {
-    function CustomerService() {
+    function CustomerService(userService) {
+        this.userService = userService;
+        var user = userService.getUser();
         this.customer = new __WEBPACK_IMPORTED_MODULE_1__module_customer__["a" /* Customer */]();
+        this.customer._id = user._id;
+        this.customer.firstName = user.firstname;
+        this.customer.lastName = user.lastname;
+        this.customer.email = user.email;
+        this.customer.address = user.address;
+        this.customer.cell = user.cell;
+        this.customer.city = user.city;
+        this.customer.cross_streets1 = user.cross_streets1;
+        this.customer.cross_streets2 = user.cross_streets2;
+        this.customer.phone = user.phone;
+        this.customer.state = user.state;
+        this.customer.salesperson1 = user.salesperson1;
+        this.customer.salesperson2 = user.salesperson2;
+        this.customer.zip = user.zip;
     }
     CustomerService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__user_service__["a" /* UserService */]])
     ], CustomerService);
     return CustomerService;
 }());
@@ -11188,6 +11747,54 @@ var StrecherbuttonService = (function () {
         __metadata("design:paramtypes", [])
     ], StrecherbuttonService);
     return StrecherbuttonService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/user.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var UserService = (function () {
+    function UserService() {
+        this.isUserLoggedIn = false;
+        if (localStorage.getItem('currentUser')) {
+            // logged in so return true
+            this.user = JSON.parse(localStorage.getItem('currentUser'));
+            this.isUserLoggedIn = true;
+        }
+    }
+    UserService.prototype.setUserLoggedIn = function () {
+        this.isUserLoggedIn = true;
+    };
+    UserService.prototype.getuserLoggedIn = function () {
+        return this.isUserLoggedIn;
+    };
+    UserService.prototype.setUser = function () {
+        this.user = JSON.parse(localStorage.getItem('currentUser'));
+    };
+    UserService.prototype.getUser = function () {
+        return this.user;
+    };
+    UserService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], UserService);
+    return UserService;
 }());
 
 
@@ -12432,12 +13039,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var URL = 'http://localhost:3000/upload';
+// const URL = 'http://localhost:3000/upload';
+var URL = 'http://8003floors.com/upload';
 var PhotobuttonComponent = (function (_super) {
     __extends(PhotobuttonComponent, _super);
     function PhotobuttonComponent() {
         var _this = _super.call(this) || this;
-        _this.URL_IMG = 'http://localhost:3000/uploads/';
+        // URL_IMG = 'http://localhost:3000/uploads/';
+        _this.URL_IMG = 'http://8003floors.com/uploads/';
         _this.isShow = false;
         _this.uploader = new __WEBPACK_IMPORTED_MODULE_2_ng2_file_upload_ng2_file_upload__["FileUploader"]({ url: URL, itemAlias: 'file' });
         _this.images = [];
@@ -12450,8 +13059,6 @@ var PhotobuttonComponent = (function (_super) {
         // able to deal with the server response.
         var me = this;
         this.uploader.onCompleteItem = function (item, response, status, headers) {
-            console.log(response);
-            console.log(response.url);
             var result = JSON.parse(response);
             me.images.push(result.url);
         };
@@ -12988,7 +13595,7 @@ var UndobuttonComponent = (function (_super) {
 /***/ "../../../../../src/app/type-floor-area-to-cover/type-floor-area-to-cover.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"page-container\">\n  <p style=\"text-align: center;color: red;\"><span style=\"font-weight:800;font-size7:0px;font-size:40px;\">World of®</span></p>\n  <h1 style=\"text-align: center;color: red;margin-top:-30px;font-size:70px;\">Floors</h1>\n  <div class=\"user-info\">\n    <div class=\"row\">\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Last Name:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.lastName\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">First Name:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.firstName\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Phone:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.phone\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Date:</label>\n        <div class=\"col-md-7\">\n          <span>17/1/2018</span>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <label class=\"col-md-3\">Address:</label>\n        <div class=\"col-md-9\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.address\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Cell:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.cell\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Email:</label>\n        <div class=\"col-md-7\">\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.email\">\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <label class=\"col-md-3\">City:</label>\n        <div class=\"col-md-9\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.city\">\n        </div>\n      </div>\n\n      <div class=\"col-md-2\">\n        <label class=\"col-md-3\">State:</label>\n        <div class=\"col-md-9\">\n          <select class=\"form-control\" [(ngModel)]=\"_customerservice.customer.state\">\n            <option>MI</option>\n          </select>\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Zip:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.zip\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Salesperson1:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.salesperson1\">\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-7\">\n          <label class=\"col-md-2\">Cross Streets:</label>\n          <div class=\"col-md-5\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.cross_streets1\">\n          </div>&\n          <div class=\"col-md-5\">\n            <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"_customerservice.customer.cross_streets2\">\n          </div>\n      </div>\n      \n      <div class=\"col-md-2\"></div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Salesperson2</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.salesperson2\">\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <button class=\"create-customer-btn\">Create Customer</button><br><br>\n  <h2 style=\"color:rgb(73, 180, 224);\">Types of Flooring / Area to cover</h2>\n  <button class=\"add-area-button\" (click)=\"addArea()\">+ Areas</button>\n\n    <app-area *ngFor=\"let area of areas\" [area]=\"area\">\n    </app-area>\n\n  <button class=\"btn-total-savings\">Total Savings</button>\n\n</div>"
+module.exports = "<div class=\"page-container\">\n  <p style=\"text-align: center;color: red;\"><span style=\"font-weight:800;font-size7:0px;font-size:40px;\">World of®</span></p>\n  <h1 style=\"text-align: center;color: red;margin-top:-30px;font-size:70px;\">Floors</h1>\n  <div class=\"user-info\">\n    <div class=\"row\">\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Last Name:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.lastName\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">First Name:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.firstName\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Phone:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.phone\">\n        </div>\n      </div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Date:</label>\n        <div class=\"col-md-7\">\n          <span>17/1/2018</span>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <label class=\"col-md-3\">Address:</label>\n        <div class=\"col-md-9\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.address\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Cell:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.cell\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Email:</label>\n        <div class=\"col-md-7\">\n          <input type=\"email\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.email\">\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <label class=\"col-md-3\">City:</label>\n        <div class=\"col-md-9\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.city\">\n        </div>\n      </div>\n\n      <div class=\"col-md-2\">\n        <label class=\"col-md-3\">State:</label>\n        <div class=\"col-md-9\">\n          <select class=\"form-control\" [(ngModel)]=\"_customerservice.customer.state\">\n            <option>MI</option>\n          </select>\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Zip:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.zip\">\n        </div>\n      </div>\n\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Salesperson1:</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.salesperson1\">\n        </div>\n      </div>\n    </div>\n\n    <div class=\"row\">\n      <div class=\"col-md-7\">\n          <label class=\"col-md-2\">Cross Streets:</label>\n          <div class=\"col-md-5\">\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.cross_streets1\">\n          </div>&\n          <div class=\"col-md-5\">\n            <input type=\"text\" class=\"form-control\"  [(ngModel)]=\"_customerservice.customer.cross_streets2\">\n          </div>\n      </div>\n      \n      <div class=\"col-md-2\"></div>\n      <div class=\"col-md-3\">\n        <label class=\"col-md-5\">Salesperson2</label>\n        <div class=\"col-md-7\">\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"_customerservice.customer.salesperson2\">\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <button class=\"create-customer-btn\" (click)=\"saveCustomer()\">Save Customer</button><br><br>\n  <h2 style=\"color:rgb(73, 180, 224);\">Types of Flooring / Area to cover</h2>\n  <button class=\"add-area-button\" (click)=\"addArea()\">+ Areas</button>\n\n    <app-area *ngFor=\"let area of areas\" [area]=\"area\">\n    </app-area>\n\n  <button class=\"btn-total-savings\">Total Savings</button>\n\n</div>"
 
 /***/ }),
 
@@ -13020,6 +13627,8 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__module_area__ = __webpack_require__("../../../../../src/app/module/area.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_areas_service__ = __webpack_require__("../../../../../src/app/services/areas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_customer_service__ = __webpack_require__("../../../../../src/app/services/customer.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_authentication_service__ = __webpack_require__("../../../../../src/app/services/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_user_service__ = __webpack_require__("../../../../../src/app/services/user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13034,12 +13643,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var TypeFloorAreaToCoverComponent = (function () {
-    function TypeFloorAreaToCoverComponent(modalService, _areasSevice, _customerservice) {
+    function TypeFloorAreaToCoverComponent(modalService, _areasSevice, _customerservice, _authService, userService) {
         var _this = this;
         this.modalService = modalService;
         this._areasSevice = _areasSevice;
         this._customerservice = _customerservice;
+        this._authService = _authService;
+        this.userService = userService;
         this.areas = [];
         this.subscribers = {};
         this.subscribers.areasubscribe = this._areasSevice.areas$.subscribe(function (areas) {
@@ -13060,6 +13673,29 @@ var TypeFloorAreaToCoverComponent = (function () {
     TypeFloorAreaToCoverComponent.prototype.ngOnDestroy = function () {
         this.subscribers.areasubscribe.unsubscribe();
     };
+    TypeFloorAreaToCoverComponent.prototype.saveCustomer = function () {
+        var _this = this;
+        this._authService.update({
+            _id: this._customerservice.customer._id,
+            firstname: this._customerservice.customer.firstName,
+            lastname: this._customerservice.customer.lastName,
+            email: this._customerservice.customer.email,
+            address: this._customerservice.customer.address,
+            cell: this._customerservice.customer.cell,
+            city: this._customerservice.customer.city,
+            cross_streets1: this._customerservice.customer.cross_streets1,
+            cross_streets2: this._customerservice.customer.cross_streets2,
+            phone: this._customerservice.customer.phone,
+            state: this._customerservice.customer.state,
+            salesperson1: this._customerservice.customer.salesperson1,
+            salesperson2: this._customerservice.customer.salesperson2,
+            zip: this._customerservice.customer.zip
+        }).subscribe(function (data) {
+            _this.userService.setUserLoggedIn();
+        }, function (error) {
+            alert('login faild');
+        });
+    };
     TypeFloorAreaToCoverComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-type-floor-area-to-cover',
@@ -13069,7 +13705,9 @@ var TypeFloorAreaToCoverComponent = (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_index__["a" /* ModalService */],
             __WEBPACK_IMPORTED_MODULE_3__services_areas_service__["a" /* AreasService */],
-            __WEBPACK_IMPORTED_MODULE_4__services_customer_service__["a" /* CustomerService */]])
+            __WEBPACK_IMPORTED_MODULE_4__services_customer_service__["a" /* CustomerService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_authentication_service__["a" /* AuthenticationService */],
+            __WEBPACK_IMPORTED_MODULE_6__services_user_service__["a" /* UserService */]])
     ], TypeFloorAreaToCoverComponent);
     return TypeFloorAreaToCoverComponent;
 }());
@@ -14012,13 +14650,6 @@ var WallComponent = (function () {
                     break;
             }
         }
-        var circlie = new __WEBPACK_IMPORTED_MODULE_1_konva__["Circle"]({
-            x: this.wall.clickedPoint.x,
-            y: this.wall.clickedPoint.y,
-            radius: 5,
-            fill: '#0f0'
-        });
-        this.group.add(circlie);
         this.redrawClickedPoint();
         this.layer.draw();
     };

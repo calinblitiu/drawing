@@ -26,55 +26,45 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-// app.get('/index', function(req, res) {
-//  if (req.cookies == undefined || req.cookies.user == undefined){
-//    res.redirect('/login');
-//  } else {
-//    res.sendFile(__dirname + "/public/first.html");
-//  }
-// });
+app.get('/index', function(req, res) {
+ if (req.cookies == undefined || req.cookies.user == undefined){
+   res.redirect('/login');
+ } else {
+   res.sendFile(__dirname + "/public/first.html");
+ }
+  
+});
 
-app.get('*', function (req, res) {
-    // res.redirect('/index');
-   // if (req.cookies == undefined || req.cookies.user == undefined){
-   //   res.redirect('/login');
-   // } else {
-   //   res.sendFile(__dirname + "/public/first.html");
-   // }
-    res.sendFile(__dirname + "/public/first.html");
+app.get('/', function (req, res) {
+    res.redirect('/index');
 });
 
 
-// app.get('/login', function (req, res) {
-//   //res.sendFile(__dirname + "/public/login.html");
-//   // res.redirect('/');
-//   if (req.cookies == undefined || req.cookies.user == undefined){
-//    res.sendFile(__dirname + "/public/login.html");
-//  } else {
-//    res.redirect("/");
-//  }
-// });
+app.get('/login', function (req, res) {
+  res.sendFile(__dirname + "/public/login.html");
+  // res.redirect('/');
+});
 
 app.post('/signin', function (req, res) {
+  console.log(req.body);
+  
   AM.manualLogin(req.body['user'], req.body['password'], function (e, o) {
     if (!o) {
       res.status(400).send(e);
     } else {
-      console.log(o);
-      req.session.user = o;
+      //req.session.user = o;
       //if (req.body['remember-me'] == 'true') {
         res.cookie('user', o.user, { maxAge: 900000 });
         res.cookie('pass', o.pass, { maxAge: 900000 });
       //}
-      // res.status(200).send(o);
-      res.redirect('/');
+      res.status(200).send(o);
     }
   });
 });
 
-// app.get("/signup", function(req, res){
-//   res.sendFile(__dirname + "/public/signup.html");
-// });
+app.get("/signup", function(req, res){
+  res.sendFile(__dirname + "/public/signup.html");
+});
 
 app.post('/signup', function (req, res) {
   console.log(req.body);
@@ -83,27 +73,57 @@ app.post('/signup', function (req, res) {
     email: req.body['email'],
     user: req.body['user'],
     pass: req.body['pass'],
+    firstname: req.body['firstname'],
+    lastname: req.body['lastname']
   }, function (e) {
     if (e) {
       res.status(400).send(e);
     } else {
-      res.status(200).send('ok');
+      AM.manualLogin(req.body['user'], req.body['pass'], function (e, o) {
+        if (!o) {
+          res.status(400).send(e);
+        } else {
+          //req.session.user = o;
+          //if (req.body['remember-me'] == 'true') {
+          res.cookie('user', o.user, { maxAge: 900000 });
+          res.cookie('pass', o.pass, { maxAge: 900000 });
+          //}
+          res.status(200).send(o);
+        }
+      });
+    }
+  });
+});
+
+app.post('/updateuser', function(req, res) {
+  console.log(req.body);
+  
+  AM.updateAccount(req.body, function (e, o) {
+    if (!o) {
+      res.status(400).send(e);
+    } else {
+      //req.session.user = o;
+      //if (req.body['remember-me'] == 'true') {
+      res.cookie('user', o.user, { maxAge: 900000 });
+      res.cookie('pass', o.pass, { maxAge: 900000 });
+      //}
+      res.status(200).send(o);
     }
   });
 });
 
 
-// app.get('/deviceslist', function (req, res, next) {
-//   var tempDvices = [];
-//   devices.map(device => {
-//     tempDvices.push({
-//       deviceId: device.deviceId,
-//       deviceName: device.deviceName
-//     });
-//   });
+app.get('/deviceslist', function (req, res, next) {
+  var tempDvices = [];
+  devices.map(device => {
+    tempDvices.push({
+      deviceId: device.deviceId,
+      deviceName: device.deviceName
+    });
+  });
 
-//   res.send(JSON.stringify(tempDvices));
-// });
+  res.send(JSON.stringify(tempDvices));
+});
 
 var storage = multer.diskStorage({ //multers disk storage settings
   destination: function (req, file, cb) {
@@ -208,13 +228,6 @@ io.on('connection', function (socket) {
     });
   });
 
-  // socket.on('new message', function (data) {
-  //   console.log(data);
-  //   socket.broadcast.emit('new message', {
-  //     command: 'Hello command',
-  //     id: data
-  //   });
-  // });
 
   socket.on('disconnect', function () {
     devices.map(device => {
