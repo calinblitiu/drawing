@@ -868,6 +868,9 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_index__ = __webpack_require__("../../../../../src/app/services/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_currentroom_service__ = __webpack_require__("../../../../../src/app/services/currentroom.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__module_room__ = __webpack_require__("../../../../../src/app/module/room.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_strecherbutton_service__ = __webpack_require__("../../../../../src/app/services/strecherbutton.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -880,9 +883,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var CancelModalComponent = (function () {
-    function CancelModalComponent(modalService, router) {
+    function CancelModalComponent(modalService, _currentRoomService, _strecherButtonService, router) {
         this.modalService = modalService;
+        this._currentRoomService = _currentRoomService;
+        this._strecherButtonService = _strecherButtonService;
         this.router = router;
     }
     CancelModalComponent.prototype.ngOnInit = function () {
@@ -891,6 +899,8 @@ var CancelModalComponent = (function () {
         this.modalService.close('cancel-modal');
     };
     CancelModalComponent.prototype.ok = function () {
+        this._currentRoomService.currentRoom = new __WEBPACK_IMPORTED_MODULE_4__module_room__["a" /* Room */]();
+        this._strecherButtonService.wallClicked(null);
         this.modalService.close('cancel-modal');
         this.router.navigateByUrl('/areatocover');
     };
@@ -900,7 +910,10 @@ var CancelModalComponent = (function () {
             template: __webpack_require__("../../../../../src/app/cancel-modal/cancel-modal.component.html"),
             styles: [__webpack_require__("../../../../../src/app/cancel-modal/cancel-modal.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_index__["a" /* ModalService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_index__["a" /* ModalService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_currentroom_service__["a" /* CurrentroomService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_strecherbutton_service__["a" /* StrecherbuttonService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], CancelModalComponent);
     return CancelModalComponent;
 }());
