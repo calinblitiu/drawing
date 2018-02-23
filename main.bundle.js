@@ -892,7 +892,7 @@ var CancelModalComponent = (function () {
     };
     CancelModalComponent.prototype.ok = function () {
         this.modalService.close('cancel-modal');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/areatovover');
     };
     CancelModalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1086,7 +1086,7 @@ var DoneModalComponent = (function () {
         this._currentRoomService.currentRoom = new __WEBPACK_IMPORTED_MODULE_5__module_room__["a" /* Room */]();
         this._strecherButtonService.wallClicked(null);
         this.modalService.close('done-modal');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/areatocover');
     };
     DoneModalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1816,13 +1816,13 @@ var GroupareaComponent = (function () {
         if (this._currentGroupService.currentGroup) {
             this._currentGroupService.currentGroup.rooms = [];
         }
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/areatocover');
     };
     GroupareaComponent.prototype.cancel = function () {
         if (this._currentGroupService.currentGroup) {
             this._currentGroupService.currentGroup.rooms = [];
         }
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/areatocover');
     };
     GroupareaComponent.prototype.cancelModal = function (id) {
         // this._currentGroupService.currentGroup.rooms = [];
