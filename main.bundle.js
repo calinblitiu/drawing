@@ -892,7 +892,7 @@ var CancelModalComponent = (function () {
     };
     CancelModalComponent.prototype.ok = function () {
         this.modalService.close('cancel-modal');
-        this.router.navigateByUrl('/areatovover');
+        this.router.navigateByUrl('/areatocover');
     };
     CancelModalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
