@@ -925,7 +925,7 @@ var CancelModalComponent = (function () {
 /***/ "../../../../../src/app/devtool/devtool.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id='tool-panel'>\n  <div class=\"tool-panel-heading\">Tool</div>\n  <div class=\"tool-panel-body\">\n    <span>Mouse Position</span>\n    <span>x: {{mouseX}}</span>\n    <span>y: {{mouseY}}</span>\n\n    <div class=\"devices-list\">\n      <button class=\"btn btn-success\" (click)=\"devicesLoad()\">Load</button>\n      <ul class=\"devices-list-ul\">\n        <li *ngFor=\"let device of devicesList\" class=\"device-item-li\" (click)=\"connect(device)\">{{device.deviceName}}\n          <span class=\"connected-label\" *ngIf=\"device.isConnected\">Connected!</span>\n        </li>\n      </ul>\n    </div>\n  </div>\n</div>"
+module.exports = "<div id='tool-panel'  [ngStyle]='getImageStyle()'>\n  <div class=\"tool-panel-heading\" (click)=\"click()\">Tool</div>\n  <div class=\"tool-panel-body\">\n    <span>Mouse Position</span>\n    <span>x: {{mouseX}}</span>\n    <span>y: {{mouseY}}</span>\n\n    <div class=\"devices-list\">\n      <button class=\"btn btn-success\" (click)=\"devicesLoad()\">Load</button>\n      <ul class=\"devices-list-ul\">\n        <li *ngFor=\"let device of devicesList\" class=\"device-item-li\" (click)=\"connect(device)\">{{device.deviceName}}\n          <span class=\"connected-label\" *ngIf=\"device.isConnected\">Connected!</span>\n        </li>\n      </ul>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -937,7 +937,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#tool-panel {\n  position: absolute;\n  top: 200px;\n  right: 20px;\n  width: 300px;\n  background: black;\n  color: white;\n  padding: 10px;\n  border-radius: 5px; }\n  #tool-panel .tool-panel-heading {\n    cursor: pointer; }\n  #tool-panel .devices-list-ul {\n    padding: 5px;\n    list-style: none; }\n    #tool-panel .devices-list-ul .device-item-li {\n      list-style: none;\n      padding: 10px;\n      cursor: pointer; }\n      #tool-panel .devices-list-ul .device-item-li .connected-label {\n        color: #f00;\n        font-weight: 700;\n        font-size: 12px;\n        float: right; }\n    #tool-panel .devices-list-ul .device-item-li:hover {\n      background: #fff;\n      color: #000;\n      border-radius: 5px;\n      box-shadow: 4px 4px 5px -2px #fff; }\n", ""]);
+exports.push([module.i, "#tool-panel {\n  position: absolute;\n  top: 200px;\n  width: 300px;\n  background: black;\n  color: white;\n  padding: 10px;\n  border-radius: 5px; }\n  #tool-panel .tool-panel-heading {\n    cursor: pointer; }\n  #tool-panel .devices-list-ul {\n    padding: 5px;\n    list-style: none; }\n    #tool-panel .devices-list-ul .device-item-li {\n      list-style: none;\n      padding: 10px;\n      cursor: pointer; }\n      #tool-panel .devices-list-ul .device-item-li .connected-label {\n        color: #f00;\n        font-weight: 700;\n        font-size: 12px;\n        float: right; }\n    #tool-panel .devices-list-ul .device-item-li:hover {\n      background: #fff;\n      color: #000;\n      border-radius: 5px;\n      box-shadow: 4px 4px 5px -2px #fff; }\n", ""]);
 
 // exports
 
@@ -975,6 +975,7 @@ var DevtoolComponent = (function () {
         this.mouseX = 0;
         this.mouseY = 0;
         this.devicesList = [];
+        this.isShow = false;
     }
     DevtoolComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -997,6 +998,23 @@ var DevtoolComponent = (function () {
     };
     DevtoolComponent.prototype.connect = function (device) {
         this.socketService.requestDeviceConnect(device);
+    };
+    DevtoolComponent.prototype.click = function () {
+        this.isShow = !this.isShow;
+    };
+    DevtoolComponent.prototype.getImageStyle = function () {
+        if (this.isShow) {
+            var styles = {
+                'right.px': 20
+            };
+            return styles;
+        }
+        else {
+            var styles = {
+                'right.px': -250,
+            };
+            return styles;
+        }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
@@ -2703,10 +2721,10 @@ var LivingRoomComponent = (function () {
     LivingRoomComponent.prototype.ngOnInit = function () {
         this.layer = new __WEBPACK_IMPORTED_MODULE_1_konva__["Layer"]();
         this._currentRoomService.layer = this.layer;
-        var wall1 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](300, 300), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](732, 300), '', '', '');
-        var wall2 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](732, 300), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](732, 732), '', '', '');
-        var wall3 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](732, 732), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](300, 732), '', '', '');
-        var wall4 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](300, 732), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](300, 300), '', '', '');
+        var wall1 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](100, 100), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](532, 100), '', '', '');
+        var wall2 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](532, 100), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](532, 532), '', '', '');
+        var wall3 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](532, 532), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](100, 532), '', '', '');
+        var wall4 = new __WEBPACK_IMPORTED_MODULE_2__module_wall__["a" /* Wall */](new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](100, 532), new __WEBPACK_IMPORTED_MODULE_3__module_point__["a" /* Point */](100, 100), '', '', '');
         wall1.startID = wall4.wallID;
         wall1.endID = wall2.wallID;
         wall1.relativeID = wall3.wallID;
@@ -10796,6 +10814,7 @@ var PanelComponent = (function () {
             container: this.container,
             width: this.width,
             height: this.height,
+            draggable: true
         });
         // this.livingRoom = new LivingRoomComponent(this.stage);
     };
@@ -11288,12 +11307,15 @@ var AuthenticationService = (function () {
     function AuthenticationService(http, userService) {
         this.http = http;
         this.userService = userService;
+        this.signinUrl = 'http://192.168.0.63:3000/signin';
+        this.signupUrl = 'http://192.168.0.63:3000/signup';
+        this.updateUrl = 'http://192.168.0.63:3000/updateuser';
         // signinUrl = 'http://localhost:3000/signin';
         // signupUrl = 'http://localhost:3000/signup';
         // updateUrl = 'http://localhost:3000/updateuser';
-        this.signinUrl = 'http://8003floors.com:3000/signin';
-        this.signupUrl = 'http://8003floors.com:3000/signup';
-        this.updateUrl = 'http://8003floors.com:3000/updateuser';
+        // signinUrl = 'http://8003floors.com:3000/signin';
+        // signupUrl = 'http://8003floors.com:3000/signup';
+        // updateUrl = 'http://8003floors.com:3000/updateuser';
         this.loginSource = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
         this.login$ = this.loginSource.asObservable();
     }
@@ -14083,6 +14105,24 @@ var WallComponent = (function () {
             me.setClickedPoint(evt);
             me.allNotifyToButtonsSevices();
         });
+        this.mainLine.on('touchstart', function (evt) {
+            me.wall.isSelected = !me.wall.isSelected;
+            if (me.wall.isSelected) {
+                this.stroke(me.MAINLINE_SELECTED_COLOR);
+                this.strokeWidth(me.MAINLINE_SELECTED_WIDTH);
+                me.clickMainLineEvent.emit({
+                    clickedWallId: me.wall.wallID
+                });
+            }
+            else {
+                if (me.strechingToolButtonGroup) {
+                    me.strechingToolButtonGroup.hide();
+                    me.wall.isStreching = false;
+                }
+            }
+            me.setClickedPoint(evt);
+            me.allNotifyToButtonsSevices();
+        });
         this.mainLine.on('dblclick', function () {
             me.viewEditLabel();
         });
@@ -14330,6 +14370,10 @@ var WallComponent = (function () {
         me.textLength.align('center');
         me.group.add(me.textLength);
         this.textLength.on('click', function () {
+            me.wall.isSelected = true;
+            me.viewEditLabel();
+        });
+        this.textLength.on('touchstart', function () {
             me.wall.isSelected = true;
             me.viewEditLabel();
         });
@@ -14758,6 +14802,15 @@ var WallComponent = (function () {
             strokeWidth: me.STRECHING_CENTER_CIRCLE_STROKEWIDTH,
         });
         this.strechingCenterCircle.on('dragmove', function () {
+            var newPoint = new __WEBPACK_IMPORTED_MODULE_2__module_point__["a" /* Point */](this.getX(), this.getY());
+            var delta = {
+                d_x: newPoint.x - me.oldStrechingPoint.x,
+                d_y: newPoint.y - me.oldStrechingPoint.y
+            };
+            me.oldStrechingPoint = new __WEBPACK_IMPORTED_MODULE_2__module_point__["a" /* Point */](this.getX(), this.getY());
+            me.strecherDrage(delta);
+        });
+        this.strechingCenterCircle.on('touchmove', function () {
             var newPoint = new __WEBPACK_IMPORTED_MODULE_2__module_point__["a" /* Point */](this.getX(), this.getY());
             var delta = {
                 d_x: newPoint.x - me.oldStrechingPoint.x,
