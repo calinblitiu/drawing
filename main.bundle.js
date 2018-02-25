@@ -11307,15 +11307,15 @@ var AuthenticationService = (function () {
     function AuthenticationService(http, userService) {
         this.http = http;
         this.userService = userService;
-        this.signinUrl = 'http://192.168.0.63:3000/signin';
-        this.signupUrl = 'http://192.168.0.63:3000/signup';
-        this.updateUrl = 'http://192.168.0.63:3000/updateuser';
+        // signinUrl = 'http://192.168.0.63:3000/signin';
+        // signupUrl = 'http://192.168.0.63:3000/signup';
+        // updateUrl = 'http://192.168.0.63:3000/updateuser';
         // signinUrl = 'http://localhost:3000/signin';
         // signupUrl = 'http://localhost:3000/signup';
         // updateUrl = 'http://localhost:3000/updateuser';
-        // signinUrl = 'http://8003floors.com:3000/signin';
-        // signupUrl = 'http://8003floors.com:3000/signup';
-        // updateUrl = 'http://8003floors.com:3000/updateuser';
+        this.signinUrl = 'http://8003floors.com:3000/signin';
+        this.signupUrl = 'http://8003floors.com:3000/signup';
+        this.updateUrl = 'http://8003floors.com:3000/updateuser';
         this.loginSource = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["a" /* Subject */]();
         this.login$ = this.loginSource.asObservable();
     }
